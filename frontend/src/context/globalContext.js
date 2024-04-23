@@ -9,6 +9,7 @@ export const GlobalProvider = ({ children }) => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   //calculate incomes
   const addIncome = async (income) => {
@@ -100,6 +101,8 @@ export const GlobalProvider = ({ children }) => {
         transactionHistory,
         error,
         setError,
+        isAuthenticated,
+        setIsAuthenticated
       }}
     >
       {children}

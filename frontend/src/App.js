@@ -8,8 +8,37 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./context/globalContext";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
+import SignIn from "./Components/SignIn/SignIn";
 
 function App() {
+  // const orbMemo = useMemo(() => {
+  //   return <Orb />;
+  // }, []);
+  const { isAuthenticated } = useGlobalContext();
+
+  return (
+    <AppStyled className="App">
+      <Routes>
+        {isAuthenticated ? (
+          <>
+            <Route index element={<Home />} />
+            <Route path="/" element={<Home />} />
+          </>
+        ) : (
+          <>
+            <Route path="sign" element={<SignIn />} />
+            <Route index element={<SignIn />} />
+          </>
+        )}
+      </Routes>
+
+      {/* {orbMemo} */}
+    </AppStyled>
+  );
+}
+
+function Home() {
   const [active, setActive] = useState(1);
 
   const global = useGlobalContext();
@@ -29,19 +58,13 @@ function App() {
         return <Dashboard />;
     }
   };
-
-  // const orbMemo = useMemo(() => {
-  //   return <Orb />;
-  // }, []);
-
   return (
-    <AppStyled className="App">
-      {/* {orbMemo} */}
+    <>
       <MainLayout>
         <Navigation active={active} setActive={setActive} />
         <main>{displayData()}</main>
       </MainLayout>
-    </AppStyled>
+    </>
   );
 }
 
