@@ -5,6 +5,7 @@ import History from "../../History/History";
 import { InnerLayout } from "../../styles/Layouts";
 import { dollar } from "../../utils/Icons";
 import Chart from "../Chart/Chart";
+import { IoMdNotifications } from "react-icons/io";
 
 function Dashboard() {
   const {
@@ -29,6 +30,7 @@ function Dashboard() {
           <span className="text-white text-center block">
             Good Morning, <br /> <span className=" text-3xl">Sumendra</span>
           </span>
+          <IoMdNotifications className=" text-white h-12 w-12 float-right" />
         </div>
         <div class="max-w-sm mx-auto  ml-[30%] bottom-0">
           {/* position: absolute; left: 35%; bottom: -100px; width: 500px; height:
@@ -140,25 +142,6 @@ function Dashboard() {
               <div class="md:w-2/5">
                 <History />
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="stats-con">
-          <div className="history-con">
-            <h2 className="salary-title">
-              Min <span>Salary</span>Max
-            </h2>
-            <div className="salary-item">
-              <p>${Math.min(...incomes.map((item) => item.amount))}</p>
-              <p>${Math.max(...incomes.map((item) => item.amount))}</p>
-            </div>
-            <h2 className="salary-title">
-              Min <span>Expense</span>Max
-            </h2>
-            <div className="salary-item">
-              <p>${Math.min(...expenses.map((item) => item.amount))}</p>
-              <p>${Math.max(...expenses.map((item) => item.amount))}</p>
             </div>
           </div>
         </div>

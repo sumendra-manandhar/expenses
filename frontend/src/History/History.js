@@ -21,7 +21,7 @@ function History() {
         const { _id, title, amount, type, date } = item;
         return (
           <div
-            class="flex items-center  space-x-4 pb-4 justify-between"
+            class="flex items-center  space-x-4 pb-4 justify-between border-b-2"
             key={_id}
           >
             <div>

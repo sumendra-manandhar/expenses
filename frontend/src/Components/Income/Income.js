@@ -15,9 +15,9 @@ function Income() {
   return (
     <IncomeStyled>
       <div className=" h-64 bg-gradient-to-b from-[#5362b2]  to-blue-900 rounded-b-3xl  ">
-        <div className=" w-full p-8">
+        <div className=" w-full h-full flex justify-center items-center">
           <span className="text-white text-center block">
-            <span className=" text-3xl">INCOMES</span>
+            <span className=" text-3xl ">INCOMES</span>
           </span>
         </div>
       </div>

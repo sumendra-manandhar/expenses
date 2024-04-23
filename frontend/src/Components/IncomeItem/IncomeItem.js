@@ -85,7 +85,57 @@ function IncomeItem({
 
   return (
     <IncomeItemStyled indicator={indicatorColor}>
-      <div className="flex items-center space-x-4 pb-4 justify-between">
+      <div class="flex items-center  space-x-4 pb-4 justify-between border-b-2 w-full">
+        <div className="icon">
+          {type === "expense" ? expenseCatIcon() : categoryIcon()}
+        </div>
+
+        <div>
+          <div class="text-gray-600 text-xl">{title}</div>
+          <div class="text-gray-900 text-sm font-semibold">
+            {" "}
+            {calender} {dateFormat(date)}
+          </div>
+          <p>
+            {comment}
+            {description}
+          </p>
+        </div>
+
+        <div className="flex flex-col items-end">
+          <div
+            className="text-sm"
+            style={{
+              color: type === "expense" ? "red" : "var(--color-green)",
+            }}
+          >
+            {type === "expense" ? `- NPR  ` : `+ NPR `}
+          </div>
+          <div
+            className="text-gray-900 text-2xl font-semibold"
+            style={{
+              color: type === "expense" ? "red" : "var(--color-green)",
+            }}
+          >
+            {amount}
+          </div>
+        </div>
+
+        <div className="btn-con">
+          <Button
+            icon={trash}
+            bPad={"1rem"}
+            bRad={"50%"}
+            bg={"var(--primary-color)"}
+            color={"#fff"}
+            iColor={"#fff"}
+            hColor={"var(--color-green)"}
+            onClick={() => deleteItem(id)}
+          />
+        </div>
+      </div>
+
+      {/* <div className="flex items-center space-x-4 pb-4 justify-between">
         <div className="icon">
           {type === "expense" ? expenseCatIcon() : categoryIcon()}
         </div>
@@ -123,7 +173,7 @@ function IncomeItem({
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </IncomeItemStyled>
   );
 }
