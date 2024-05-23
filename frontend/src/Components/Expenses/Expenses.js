@@ -25,9 +25,50 @@ function Expenses() {
 
       <InnerLayout>
         <h2 className="total-income">
-          Total Expense: <span>${totalExpenses()}</span>
+          Total Expense:{" "}
+          <span className=" text-red-700">NPR {totalExpenses()}</span>
         </h2>
-        <div className="income-content">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-col md:flex-row gap-4">
+            <div class="md:w-3/5">
+              {" "}
+              <ExpenseForm />
+            </div>
+            <div class="md:w-2/5">
+              {" "}
+              <div className="incomes">
+                {expenses.map((income) => {
+                  const {
+                    _id,
+                    title,
+                    amount,
+                    date,
+                    category,
+                    description,
+                    type,
+                  } = income;
+                  console.log(income);
+                  return (
+                    <IncomeItem
+                      key={_id}
+                      id={_id}
+                      title={title}
+                      description={description}
+                      amount={amount}
+                      date={date}
+                      type={type}
+                      category={category}
+                      indicatorColor="var(--color-green)"
+                      deleteItem={deleteExpense}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="income-content">
           <div className="form-container">
             <ExpenseForm />
           </div>
@@ -52,7 +93,7 @@ function Expenses() {
               );
             })}
           </div>
-        </div>
+        </div> */}
       </InnerLayout>
     </ExpenseStyled>
   );
@@ -74,7 +115,6 @@ const ExpenseStyled = styled.div`
     span {
       font-size: 2.5rem;
       font-weight: 800;
-      color: var(--color-green);
     }
   }
   .income-content {

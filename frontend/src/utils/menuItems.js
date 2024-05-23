@@ -6,15 +6,17 @@ import {
   trend,
 } from "../utils/Icons";
 
-import { MdDashboard } from "react-icons/md";
-import { GiReceiveMoney } from "react-icons/gi";
-import { GiPayMoney } from "react-icons/gi";
+// import { MdDashboard } from "react-icons/md";
+// import { GiReceiveMoney } from "react-icons/gi";
+// import { GiPayMoney } from "react-icons/gi";
 
 export const menuItems = [
   {
     id: 1,
     title: "Dashboard",
-    icon: <MdDashboard className=" h-9 w-9  text-black" />,
+    // icon: <MdDashboard className=" h-9 w-9  text-black" />,
+    icon: accounts,
+
     link: "/dashboard",
   },
   {
@@ -26,14 +28,17 @@ export const menuItems = [
   {
     id: 3,
     title: "Incomes",
-    icon: <GiReceiveMoney className=" h-9 w-9 text-black" />,
+    // icon: <GiReceiveMoney className=" h-9 w-9 text-black" />,
+    icon: accounts,
 
     link: "/dashboard",
   },
   {
     id: 4,
     title: "Expenses",
-    icon: <GiPayMoney className=" h-9 w-9 text-black" />,
+    // icon: <GiPayMoney className=" h-9 w-9 text-black" />,
+    icon: accounts,
+
     link: "/dashboard",
   },
   {

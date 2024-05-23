@@ -24,7 +24,7 @@ function Income() {
 
       <InnerLayout>
         <h2 className="total-income">
-          Total Income: <span>${totalIncome()}</span>
+          Total Income: <span>NPR {totalIncome()}</span>
         </h2>
         <div class="container mx-auto px-4">
           <div class="flex flex-col md:flex-row gap-4">

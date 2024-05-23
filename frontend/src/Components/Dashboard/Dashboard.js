@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../../context/globalContext";
 import History from "../../History/History";
@@ -23,15 +23,63 @@ function Dashboard() {
     getExpenses();
   }, []);
 
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleNotificationClick = () => {
+    if (totalExpenses() > totalIncome()) {
+      setShowPopup(true);
+    }
+  };
+
+  // debugger;
+
+  const email = localStorage.getItem("display");
+
+  // Extract username from email
+  const atIndex = email.indexOf("@");
+  const username = email.slice(0, atIndex);
+
+  // Capitalize initial letter of username
+  const capitalizedUsername =
+    username.charAt(0).toUpperCase() + username.slice(1);
+
+  console.log(capitalizedUsername);
+
   return (
     <DashboardStyled>
       <div className=" h-64 bg-gradient-to-b from-[#5362b2]  to-blue-900 rounded-b-3xl  ">
-        <div className=" w-full p-8">
+        <div className="w-full p-8 relative">
           <span className="text-white text-center block">
-            Good Morning, <br /> <span className=" text-3xl">Sumendra</span>
+            Good Morning, <br />
+            <span className="text-3xl">{capitalizedUsername}</span>
           </span>
-          <IoMdNotifications className=" text-white h-12 w-12 float-right" />
+          {totalExpenses() > totalIncome() && (
+            <div className="absolute top-0 right-0 mt-4 mr-4">
+              <IoMdNotifications
+                className="text-white h-12 w-12 cursor-pointer"
+                onClick={handleNotificationClick}
+              />
+              <span className="bg-red-500 text-white rounded-full text-xs p-1 absolute top-0 right-0 transform translate-x-2 translate-y-2">
+                !
+              </span>
+            </div>
+          )}
+          {showPopup && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+              <div className="bg-white p-8 rounded shadow-md">
+                <h2 className="text-xl font-bold mb-4">Alert</h2>
+                <p>You have gone over budget.</p>
+                <button
+                  className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                  onClick={() => setShowPopup(false)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
         </div>
+
         <div class="max-w-sm mx-auto  ml-[30%] bottom-0">
           {/* position: absolute; left: 35%; bottom: -100px; width: 500px; height:
           270px; */}

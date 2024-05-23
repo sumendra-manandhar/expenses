@@ -37,7 +37,7 @@ function Form() {
 
   return (
     <FormStyled onSubmit={handleSubmit}>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error">{error}</p>}  
       <div className="input-control">
         <input
           type="text"
@@ -105,7 +105,7 @@ function Form() {
           icon={plus}
           bPad={".8rem 1.6rem"}
           bRad={"30px"}
-          bg={"var(--color-accent"}
+          bg={"var(--color-greenD"}
           color={"#fff"}
         />
       </div>
