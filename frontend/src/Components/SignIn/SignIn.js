@@ -10,69 +10,25 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // debugger;
 
     try {
-      if (isSignIn) {
-        // Sign-in logic
-        const userDataResponse = await fetch(
-          `http://localhost:8080/api/v1/user`,
-          {
-            method: "GET",
-            headers: {
-              // Include any required headers
-            },
-          }
-        );
+      const endpoint = isSignIn ? "sign-in" : "sign-up"; // Choose API endpoint based on isSignIn state
+      const response = await fetch(`http://localhost:8080/api/v1/${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-        if (!userDataResponse.ok) {
-          const errorData = await userDataResponse.json(); // Parse error response
-          setError(errorData.message); // Set error message state
-          return;
-        }
-
-        const users = await userDataResponse.json();
-        // Iterate through the array of users to find a match
-        const authenticatedUser = users.find(
-          (user) => user.email === email && user.password === password
-        );
-
-        if (authenticatedUser) {
-          // Proceed to next page or set authentication state
-          setIsAuthenticated(true);
-          console.log("Authentication successful");
-          // debugger;
-          const display = authenticatedUser.email;
-          localStorage.setItem("display", display);
-        } else {
-          setError("Invalid credentials. Please try again.");
-        }
-      } else {
-        // Sign-up logic
-        const signUpResponse = await fetch(
-          `http://localhost:8080/api/v1/sign-up`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: email,
-              password: password,
-            }),
-          }
-        );
-
-        if (!signUpResponse.ok) {
-          const errorData = await signUpResponse.json(); // Parse error response
-          setError(errorData.message); // Set error message state
-          return;
-        }
-
-        // Sign-up was successful
-        setIsAuthenticated(true);
-        console.log("Sign-up successful");
+      if (!response.ok) {
+        const errorData = await response.json(); // Parse error response
+        setError(errorData.message); // Set error message state
+        return;
       }
+
+      setIsAuthenticated(true);
+      console.log("Authentication successful");
     } catch (error) {
       console.error("Error:", error);
       setError("An unexpected error occurred. Please try again.");
@@ -109,7 +65,7 @@ const SignIn = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Email
+                  Username
                 </label>
                 <input
                   type="text"
@@ -145,13 +101,12 @@ const SignIn = () => {
                     Confirm Password
                   </label>
                   <input
-                    required
                     type="password"
                     id="confirmPassword"
                     name="confirmPassword"
                     className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                   />
-                  {/* <label
+                  <label
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700"
                   >
@@ -162,7 +117,7 @@ const SignIn = () => {
                     id="email"
                     name="email"
                     className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-                  /> */}
+                  />
                 </div>
               )}
               {error && (

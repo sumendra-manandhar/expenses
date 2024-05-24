@@ -14,16 +14,23 @@ exports.signIn = async (req, res) => {
     // Find the user by email
     const user = await SignInSchema.findOne({ email });
 
+    console.log("User", user);
+
     // Check if user exists
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     // Check if the provided password matches the stored password
-    const isPasswordValid = await user.comparePassword(password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Incorrect password" });
+    if (user.password != password) {
+      return res
+        .status(401)
+        .json({ message: "Incorrect username or password" });
     }
+    // const isPasswordValid = await user.(password);
+    // if (!isPasswordValid) {
+    //   return res.status(401).json({ message: "Incorrect password" });
+    // }
 
     // If everything is correct, user is authenticated
     res.status(200).json({ message: "Sign-in successful", user });
